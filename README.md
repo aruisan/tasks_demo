@@ -1,61 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Tareas App
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación web construida con Laravel 12, Vue 3, Inertia.js, MySQL y Jetstream (stack Inertia) para la gestión de tareas con autenticación, CRUD completo, buscador y paginación.
 
-## About Laravel
+Requisitos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+PHP >= 8.2
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Node.js y NPM
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Composer
 
-## Learning Laravel
+MySQL
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Laravel 12
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Instalación
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# clonar repositorio
+git clone https://github.com/aruisan/tasks_demo.git
+cd tasks_demo
 
-## Laravel Sponsors
+# instalar dependencias back
+composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+#  instalar dependencias de frontend
+npm install && npm run dev
 
-### Premium Partners
+# copiar y configurar variables de entorno
+cp .env.example .env
+php artisan key:generate
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# configurar base de datos
+DB_DATABASE = 'tareas_demo'
+DB_USERNAME = 'tu_usuario'
+DB_PASSWORD = 'tu_contraseña'
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Iniciar servidor
+php artisan serve
 
-## Code of Conduct
+Funcionalidades
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Registro e inicio de sesión con Jetstream (Inertia).
 
-## Security Vulnerabilities
+CRUD de tareas por usuario autenticado.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Marcar tareas como completadas.
 
-## License
+Autorización basada en políticas para evitar modificar tareas de otros usuarios.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Buscador de tareas por título.
+
+Paginación.
+
+Estructura del proyecto
+
+app/
+  Http/
+    Controllers/
+      TaskController.php
+  Models/
+    Task.php
+  Policies/
+    TaskPolicy.php
+resources/
+  js/
+    Pages/
+      Tasks/
+        Index.vue
+routes/
+  web.php
+
+Justificación técnica
+
+Jetstream + Inertia + Vue 3: Para tener autenticación segura con SPA moderna.
+
+Policies: Para aplicar control de acceso a los recursos (tareas) a nivel de backend.
+
+Bootstrap: Utilizado por simplicidad y compatibilidad inmediata.
+
+Laravel Eloquent: Facilita relaciones entre usuario y tareas.
+
+Control de versiones (Git): Se utilizaron commits descriptivos por cada avance (migraciones, vistas, controladores, etc).
+
+Diagrama de base de datos
+
+users
+  id
+  name
+  email
+  ...
+
+tasks
+  id
+  user_id (FK a users)
+  title
+  description
+  completed
+  timestamps
+
+  
+Autor
+
+Oscar Amortegui
+
+Licencia
+
+MIT
