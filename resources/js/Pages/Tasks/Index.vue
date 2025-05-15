@@ -17,6 +17,17 @@ const submit = () => {
     })
 }
 
+const toggleCompleted = task => {
+    router.put(route('tasks.update', task.id), {
+        ...task,
+        completed:!task.completed
+    });
+}
+
+const deleteTask = task => {
+    router.delete(route('tasks.destroy', task.id));
+}
+
 </script>
 <template>
     <Head  title="Mis Tareas"/>
@@ -49,7 +60,11 @@ const submit = () => {
                     </p>
 
                     <div class="d-flex justify-content-between">
+                        <button class="btn btn-outline-success btn-sm" @click="toggleCompleted(task)">
+                            {{ task.completed ? 'Terminado' : 'Pendiente' }}
+                        </button>
 
+                        <button class="btn btn-outline-danger btn-sm" @click="deleteTask(task)">Eliminar</button>
                     </div>
                 </div>
             </div>
